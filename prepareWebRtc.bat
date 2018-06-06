@@ -263,6 +263,9 @@ CALL:makeLink . third_party\libjpeg_turbo ..\libjpeg_turbo
 CALL:makeLink . third_party\jsoncpp chromium\src\third_party\jsoncpp
 CALL:makeLink . third_party\winuwp_compat ..\..\windows\third_party\winuwp_compat
 CALL:makeLink . third_party\winuwp_h264 ..\..\windows\third_party\winuwp_h264
+CALL:makeLink . third_party\openh264 ..\..\windows\third_party\openh264
+CALL:makeLink . third_party\ffmpeg ..\..\windows\third_party\ffmpeg
+CALL:makeLink . third_party\nvpipe ..\..\windows\third_party\nvpipe
 CALL:makeLink . third_party\gflags ..\gflags-build
 CALL:makeLink . third_party\gflags\src ..\gflags
 CALL:makeLink . third_party\winsdk_samples ..\winsdk_samples_v71
