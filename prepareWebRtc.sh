@@ -544,6 +544,9 @@ makeLinks()
   makeLink "." "third_party/jsoncpp" "chromium/src/third_party/jsoncpp"
   makeLink "." "third_party/winuwp_compat" "../../windows/third_party/winuwp_compat"
   makeLink "." "third_party/winuwp_h264" "../../windows/third_party/winuwp_h264"
+  makeLink "." "third_party/openh264" "../openh264"
+  makeLink "." "third_party/ffmpeg" "../ffmpeg"
+  makeLink "." "third_party/nvpipe" "../../windows/third_party/nvpipe"
   makeLink "." "third_party/gflags" "../gflags-build"
   makeLink "." "third_party/gflags/src" "../gflags"
   #makeLink "." "third_party/winsdk_samples" "../winsdk_samples_v71"
@@ -811,7 +814,6 @@ generateProjectsForPlatform()
   sed -i -e "s/-is_debug-/$IsDebugTarget/g" $webRTCGnArgsDestinationPath
   sed -i -e "s/-target_os-/$1/g" $webRTCGnArgsDestinationPath
 
-
   if [ $logLevel -ge $trace ]; then
     gn gen $outputPath
   else
@@ -992,7 +994,6 @@ makeFolderStructure
 makeLinks
 updateFolders
 installSysRoot
-#setBogusGypFiles
 updateClang
 setupDepotTools
 downloadGnBinaries
