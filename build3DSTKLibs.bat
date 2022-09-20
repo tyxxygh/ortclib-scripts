@@ -71,10 +71,12 @@ GOTO:EOF
 
 :buildNativeLibs
     CALL:print %warning% "Building 3d streaming toolkit native and uwp libs"
-	!msVS_Path!\MSBuild\15.0\Bin\amd64\msbuild.exe %~dp0\..\webrtc\windows\solutions\WebRtc.sln /property:Platform=x86;Configuration=Release
-	!msVS_Path!\MSBuild\15.0\Bin\amd64\msbuild.exe %~dp0\..\webrtc\windows\solutions\WebRtc.sln /property:Platform=x64;Configuration=Release
-	!msVS_Path!\MSBuild\15.0\Bin\amd64\msbuild.exe %~dp0\..\webrtc\windows\solutions\WebRtc.sln /property:Platform=x86;Configuration=Debug
-	!msVS_Path!\MSBuild\15.0\Bin\amd64\msbuild.exe %~dp0\..\webrtc\windows\solutions\WebRtc.sln /property:Platform=x64;Configuration=Debug
+	::!msVS_Path!\MSBuild\15.0\Bin\amd64\msbuild.exe %~dp0\..\webrtc\windows\solutions\WebRtc.sln /property:Platform=x86;Configuration=Release
+	::!msVS_Path!\MSBuild\15.0\Bin\amd64\msbuild.exe %~dp0\..\webrtc\windows\solutions\WebRtc.sln /property:Platform=x64;Configuration=Release
+	!msVS_Path!\MSBuild\15.0\Bin\amd64\msbuild.exe %~dp0\..\webrtc\windows\solutions\WebRtc.sln /property:Platform=win32_x64;Configuration=Release
+	::!msVS_Path!\MSBuild\15.0\Bin\amd64\msbuild.exe %~dp0\..\webrtc\windows\solutions\WebRtc.sln /property:Platform=x86;Configuration=Debug
+	::!msVS_Path!\MSBuild\15.0\Bin\amd64\msbuild.exe %~dp0\..\webrtc\windows\solutions\WebRtc.sln /property:Platform=x64;Configuration=Debug
+	!msVS_Path!\MSBuild\15.0\Bin\amd64\msbuild.exe %~dp0\..\webrtc\windows\solutions\WebRtc.sln /property:Platform=win32_x64;Configuration=Debug
 
     IF ERRORLEVEL 1 CALL:error 1 "Building 3d streaming toolkit native and uwp libs has failed"s
 
