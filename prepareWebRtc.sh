@@ -626,15 +626,54 @@ setupDepotTools()
   PATH=$PATH:$DepotToolsPath
 }
 
+downloadBinFromGS()
+{
+  storageURL=https://storage.googleapis.com
+  binName=$1
+  hashVal=$(cat buildtools/$hostBuildTools/$binName.sha1)
+  url=$storageURL/chromium-$binName/$hashVal
+  print $debug $binName -url: $url
+  result=$(wget --no-check-certificate $url)
+  if [ $? -eq 0 ]; then
+    mv $hashVal buildtools/$hostBuildTools/$binName
+    chmod +x buildtools/$hostBuildTools/$binName
+  fi
+  return $result
+}
+
 downloadGnBinaries()
 {
   hostBuildTools=mac
   if [ "$HOST_SYSTEM" == "linux" ]; then
     hostBuildTools=linux64
   fi
+  if [ ! -e "buildtools/$hostBuildTools/gn" ]; then
+	print $debug "Downloading gn tool ..."
+    result=`downloadBinFromGS gn`
+    #result=$(python $DepotToolsPath/download_from_google_storage.py -b chromium-gn -s buildtools/$hostBuildTools/gn.sha1)
+    print $debug "$result"
+  fi
+  if [ ! -e "buildtools/$hostBuildTools/clang-format" ]; then
+    print $debug "Downloading clang-format tool ..."
+    result=`downloadBinFromGS clang-format`
+    #result=$(python $DepotToolsPath/download_from_google_storage.py -b chromium-clang-format -s buildtools/$hostBuildTools/clang-format.sha1)
+    print $debug "$result"
+  fi
+}
 
+:<<BLOCK
+downloadGnBinaries()
+{
+  hostBuildTools=mac
+  if [ "$HOST_SYSTEM" == "linux" ]; then
+    hostBuildTools=linux64
+  fi
+  export PYTHONHTTPSVERIFY=0
   if [ ! -e "buildtools/$hostBuildTools/gn" ]; then
     print $debug "Downloading gn tool ..."
+    print $debug $(python --version)
+    print $debug $(which python)
+    print $debug $(pwd)
     result=$(python $DepotToolsPath/download_from_google_storage.py -b chromium-gn -s buildtools/$hostBuildTools/gn.sha1)
     print $debug "$result"
   fi
@@ -644,6 +683,7 @@ downloadGnBinaries()
     print $debug "$result"
   fi
 }
+BLOCK
 
 make_directory()
 {
