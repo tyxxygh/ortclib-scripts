@@ -16,6 +16,8 @@ function collect()
 	cp -u $baseDir/$configDir/obj/webrtc/common_video/libcommon_video.a $targetDir
 	#cp -u $baseDir/$configDir/obj/third_party/boringssl/libboringssl_asm.a $targetDir
 	cp -u $baseDir/$configDir/obj/third_party/boringssl/libboringssl.a $targetDir
+
+	echo "Collect $config build result into $targetDir"
 }
 
 collect release
